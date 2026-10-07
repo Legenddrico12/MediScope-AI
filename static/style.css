@@ -1,0 +1,991 @@
+:root{
+  --bg:#061014;
+  --panel:#0b191d;
+  --panel2:#0e2025;
+  --line:#1d3a41;
+  --line2:#284d55;
+  --text:#e6f5f5;
+  --muted:#91a8ad;
+  --dim:#5f7b82;
+  --accent:#5fe0c7;
+  --accent2:#3bc6b0;
+  --warning:#e6c66a;
+  --danger:#ff8b8b;
+  --shadow:0 18px 50px rgba(0,0,0,.22);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  font-size:16px;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(57,185,166,.07),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(54,131,151,.07),
+      transparent 28%
+    ),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+  height:78px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  background:rgba(7,18,22,.92);
+  backdrop-filter:blur(14px);
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  border:1px solid var(--accent);
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  color:var(--accent);
+  font-size:20px;
+  box-shadow:0 0 24px rgba(95,224,199,.08);
+}
+
+.brand b{
+  display:block;
+  font-size:18px;
+  letter-spacing:.2px;
+}
+
+.brand span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.status{
+  font-size:10px;
+  color:#78e6d1;
+  letter-spacing:1.4px;
+  border:1px solid #245047;
+  background:#09201d;
+  padding:8px 11px;
+  border-radius:20px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+  max-width:1680px;
+  margin:auto;
+  padding:42px 34px 28px;
+}
+
+.hero{
+  display:flex;
+  justify-content:space-between;
+  gap:48px;
+  align-items:flex-end;
+  margin-bottom:28px;
+}
+
+.eyebrow,
+.panel-title{
+  font-size:11px;
+  letter-spacing:1.7px;
+  color:#70d8c7;
+  font-weight:700;
+}
+
+.hero h1{
+  font-size:52px;
+  line-height:1.02;
+  margin:12px 0 14px;
+  letter-spacing:-1.7px;
+  font-weight:750;
+}
+
+.hero h1 em{
+  color:var(--accent);
+  font-style:normal;
+}
+
+.hero p{
+  max-width:790px;
+  color:#9ab0b5;
+  line-height:1.7;
+  font-size:14px;
+  margin:0;
+}
+
+.rule-card{
+  width:350px;
+  border:1px solid #27534b;
+  background:#0a1e1c;
+  border-radius:14px;
+  padding:20px 22px;
+  box-shadow:var(--shadow);
+}
+
+.rule-card strong{
+  display:block;
+  color:#76e3cf;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.rule-card span{
+  font-size:12px;
+  color:#91a8ad;
+  line-height:1.6;
+}
+
+/* =========================================================
+   WORKSPACE
+========================================================= */
+
+.workspace{
+  display:grid;
+  grid-template-columns:330px minmax(520px,1fr) 470px;
+  gap:16px;
+  align-items:stretch;
+}
+
+.panel{
+  border:1px solid var(--line);
+  background:linear-gradient(
+    180deg,
+    #0a191d,
+    #081519
+  );
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.input-panel,
+.results-panel{
+  padding:20px;
+}
+
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.panel-title small{
+  color:#5e7a80;
+  font-size:9px;
+  letter-spacing:1px;
+}
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.dropzone{
+  border:1px dashed #31565e;
+  border-radius:12px;
+  padding:30px 14px;
+  text-align:center;
+  margin-bottom:20px;
+  background:rgba(4,15,18,.6);
+  transition:.2s;
+}
+
+.dropzone.drag{
+  border-color:var(--accent);
+  background:#0b2421;
+}
+
+.upload-icon{
+  font-size:34px;
+  color:var(--accent);
+}
+
+.dropzone h3{
+  margin:12px 0 7px;
+  font-size:15px;
+}
+
+.dropzone p,
+.filename{
+  font-size:10px;
+  color:#718b91;
+}
+
+.secondary{
+  font-size:11px;
+  cursor:pointer;
+  background:#10262b;
+  border:1px solid #2b4c54;
+  color:#d4e7e9;
+  border-radius:8px;
+  padding:10px 14px;
+}
+
+.filename{
+  margin-top:13px;
+  word-break:break-all;
+  line-height:1.4;
+}
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+label{
+  display:block;
+  color:#7c979d;
+  font-size:10px;
+  letter-spacing:1px;
+  margin:17px 0 8px;
+  font-weight:650;
+}
+
+label span{
+  float:right;
+  color:#4d696f;
+  font-size:9px;
+}
+
+select,
+textarea{
+  width:100%;
+  border:1px solid #28474e;
+  background:#091b20;
+  color:#d9edef;
+  border-radius:9px;
+  padding:11px 12px;
+  outline:none;
+}
+
+select{
+  cursor:pointer;
+}
+
+textarea{
+  height:118px;
+  resize:vertical;
+  line-height:1.5;
+}
+
+select:focus,
+textarea:focus{
+  border-color:#4e9e91;
+  box-shadow:0 0 0 3px rgba(95,224,199,.06);
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.primary{
+  width:100%;
+  margin-top:16px;
+  background:linear-gradient(
+    135deg,
+    #65e2ca,
+    #42c6b0
+  );
+  color:#03201b;
+  border:0;
+  border-radius:9px;
+  padding:12px 14px;
+  font-weight:750;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(67,202,177,.12);
+}
+
+.primary:hover{
+  filter:brightness(1.06);
+}
+
+.primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.privacy{
+  font-size:9px;
+  color:#5c767c;
+  line-height:1.55;
+  margin-top:14px;
+}
+
+/* =========================================================
+   VIEWER
+========================================================= */
+
+.viewer-panel{
+  min-width:0;
+}
+
+/* Viewer header */
+
+.viewer-head{
+  padding:19px 20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.viewer-head small{
+  display:block;
+  font-size:10px;
+  color:#718b91;
+  margin-top:6px;
+}
+
+/*
+   ZOOM CONTROLS REMOVED
+
+   We hide the old:
+   - button -
+   - 100%
+   - button +
+
+   This prevents the frontend from changing image scale
+   while bounding boxes are being displayed.
+*/
+
+.tools{
+  display:none !important;
+}
+
+/* =========================================================
+   IMAGE VIEWER
+========================================================= */
+
+.viewer{
+  height:690px;
+
+  background:
+    radial-gradient(
+      circle,
+      #0c1c20 0%,
+      #03090b 65%
+    );
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  padding:24px;
+}
+
+/* Grid background */
+
+.viewer:before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size:32px 32px;
+
+  pointer-events:none;
+}
+
+/*
+   IMPORTANT:
+
+   image-stage should contain BOTH:
+      <img>
+      <div class="marker">
+
+   Therefore the marker coordinates are relative
+   to the exact displayed image.
+*/
+
+.image-stage{
+  position:relative;
+
+  display:inline-block;
+
+  width:auto;
+  height:auto;
+
+  max-width:100%;
+  max-height:100%;
+
+  z-index:2;
+
+  line-height:0;
+
+  box-shadow:
+    0 16px 50px rgba(0,0,0,.45);
+}
+
+/* Medical image */
+
+.viewer img{
+  display:block;
+
+  width:auto;
+  height:auto;
+
+  max-width:100%;
+  max-height:642px;
+
+  object-fit:contain;
+
+  position:relative;
+
+  z-index:2;
+
+  /*
+     IMPORTANT:
+     No transform.
+     No zoom.
+     No scaling animation.
+  */
+
+  transform:none !important;
+
+  transition:none !important;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+}
+
+/* =========================================================
+   EMPTY VIEW
+========================================================= */
+
+.empty-view{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:#4c676d;
+  font-size:12px;
+  z-index:1;
+}
+
+.scan-symbol{
+  font-size:64px;
+  margin-bottom:13px;
+  color:#2c4b52;
+}
+
+/* =========================================================
+   MARKERS
+========================================================= */
+
+/*
+   Marker is intentionally absolute relative to
+   .image-stage rather than the entire .viewer.
+*/
+
+.image-stage .marker{
+  position:absolute;
+
+  border:2px solid var(--accent);
+
+  background:rgba(
+    70,
+    220,
+    195,
+    .12
+  );
+
+  cursor:pointer;
+
+  pointer-events:auto;
+
+  z-index:10;
+
+  box-shadow:
+    0 0 16px rgba(
+      95,
+      224,
+      199,
+      .16
+    );
+
+  /*
+     Prevent browser from changing
+     marker geometry.
+  */
+
+  box-sizing:border-box;
+}
+
+/* Finding label */
+
+.image-stage .tag{
+  position:absolute;
+
+  top:-25px;
+  left:-2px;
+
+  background:var(--accent);
+
+  color:#04201b;
+
+  font-size:9px;
+
+  font-weight:750;
+
+  padding:5px 8px;
+
+  border-radius:
+    5px 5px 0 0;
+
+  white-space:nowrap;
+
+  line-height:1;
+
+  z-index:11;
+}
+
+/* =========================================================
+   VIEWER FOOT
+========================================================= */
+
+.viewer-foot{
+  border-top:1px solid var(--line);
+  padding:12px 18px;
+  font-size:9px;
+  color:#678087;
+
+  display:flex;
+  justify-content:space-between;
+}
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.results-panel{
+  padding:0;
+}
+
+.results-panel>.panel-title{
+  padding:20px 20px 0;
+}
+
+.results-empty{
+  text-align:center;
+  padding:85px 28px;
+  color:#70898f;
+}
+
+.results-empty h3{
+  font-size:15px;
+  color:#b8cdd0;
+  margin:13px 0 8px;
+}
+
+.results-empty p{
+  font-size:11px;
+  line-height:1.6;
+}
+
+.shield{
+  margin:auto;
+  width:52px;
+  height:52px;
+
+  border:1px solid #345a61;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  color:var(--accent);
+
+  font-size:21px;
+}
+
+#results>div:first-child{
+  padding:0 20px 8px !important;
+}
+
+/* =========================================================
+   STATUS PILL
+========================================================= */
+
+.pill{
+  display:inline-block;
+
+  border:1px solid #2b6258;
+
+  color:#74dfcd;
+
+  background:#09231f;
+
+  border-radius:20px;
+
+  padding:5px 8px;
+
+  font-size:8px;
+
+  letter-spacing:1px;
+
+  margin-bottom:10px;
+
+  font-weight:700;
+}
+
+#results>div:first-child p{
+  font-size:12px !important;
+  line-height:1.6 !important;
+  color:#91a8ad !important;
+}
+
+/* =========================================================
+   UNCERTAINTY RADAR
+========================================================= */
+
+.radar{
+  margin:10px 20px 16px;
+  padding:15px;
+
+  border:1px solid #234249;
+
+  border-radius:10px;
+
+  background:#0a1b20;
+}
+
+.radar-title{
+  display:flex;
+  justify-content:space-between;
+
+  font-size:10px;
+
+  color:#7ce0cd;
+
+  margin-bottom:14px;
+
+  font-weight:700;
+}
+
+.meter{
+  margin:11px 0;
+}
+
+.meter label{
+  margin:0 0 5px;
+  font-size:9px;
+  color:#789197;
+  letter-spacing:0;
+
+  display:flex;
+  justify-content:space-between;
+}
+
+.bar{
+  height:6px;
+
+  background:#152c31;
+
+  border-radius:8px;
+
+  overflow:hidden;
+}
+
+.bar i{
+  display:block;
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #3ebba7,
+      #6de4ce
+    );
+
+  border-radius:8px;
+}
+
+/* =========================================================
+   EVIDENCE GAP
+========================================================= */
+
+.gapbox{
+  margin:10px 20px;
+
+  padding:12px 13px;
+
+  border:1px solid #594d28;
+
+  background:#19170d;
+
+  border-radius:9px;
+
+  color:#c5b56c;
+
+  font-size:10px;
+
+  line-height:1.65;
+}
+
+/* =========================================================
+   FINDINGS
+========================================================= */
+
+.finding{
+  border-top:1px solid #19373d;
+
+  padding:17px 20px;
+
+  transition:.2s;
+}
+
+.finding:hover{
+  background:#0b1d21;
+}
+
+.finding-top{
+  display:flex;
+  justify-content:space-between;
+
+  gap:14px;
+
+  align-items:start;
+}
+
+.finding h3{
+  font-size:15px;
+
+  margin:0 0 8px;
+
+  color:#e2f0f1;
+
+  line-height:1.3;
+}
+
+.finding p{
+  font-size:12px;
+
+  line-height:1.65;
+
+  color:#91a8ad;
+
+  margin:0 0 12px;
+}
+
+.confidence{
+  color:#73e0cd;
+
+  font-size:12px;
+
+  font-weight:750;
+
+  white-space:nowrap;
+}
+
+.evidence{
+  margin-top:12px;
+
+  background:#0b2025;
+
+  border:1px solid #17383f;
+
+  border-radius:8px;
+
+  padding:11px;
+
+  font-size:10px;
+
+  line-height:1.7;
+
+  color:#86a0a6;
+}
+
+.evidence b{
+  color:#b9ced1;
+}
+
+/* =========================================================
+   DOCTOR REVIEW
+========================================================= */
+
+.review{
+  margin:15px 20px 20px;
+
+  padding:14px;
+
+  border-left:3px solid var(--accent);
+
+  background:#0a201d;
+
+  border-radius:
+    0 8px 8px 0;
+
+  font-size:11px;
+
+  line-height:1.65;
+
+  color:#8da5aa;
+}
+
+.review b{
+  color:#72dfcc;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:16px;
+
+  color:#49656c;
+
+  font-size:9px;
+
+  letter-spacing:1px;
+
+  padding:0 3px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1350px){
+
+  .workspace{
+    grid-template-columns:
+      300px
+      minmax(440px,1fr)
+      400px;
+  }
+
+  .viewer{
+    height:640px;
+  }
+
+  .viewer img{
+    max-height:592px;
+  }
+}
+
+@media(max-width:1100px){
+
+  main{
+    padding:30px 20px;
+  }
+
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+  .viewer{
+    height:600px;
+  }
+
+  .viewer img{
+    max-height:552px;
+  }
+
+  .hero{
+    flex-direction:column;
+    align-items:start;
+  }
+
+  .rule-card{
+    width:100%;
+  }
+}
+
+@media(max-width:700px){
+
+  header{
+    padding:0 16px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  main{
+    padding:24px 14px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .viewer{
+    height:480px;
+    padding:15px;
+  }
+
+  .viewer img{
+    max-width:100%;
+    max-height:450px;
+  }
+
+  .viewer-foot,
+  footer{
+    font-size:8px;
+  }
+}

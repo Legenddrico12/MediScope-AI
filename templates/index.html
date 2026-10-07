@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MediScope AI</title>
+
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+
+<body>
+
+<header>
+
+  <div class="brand">
+
+    <div class="logo">✦</div>
+
+    <div>
+      <b>MediScope</b>
+      <span>Evidence-first multimodal imaging copilot</span>
+    </div>
+
+  </div>
+
+
+  <div class="status">
+    ● GROQ VISION · RESEARCH MODE
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero">
+
+    <div>
+
+      <div class="eyebrow">
+        MEDICAL IMAGING · MULTIMODAL AI · HUMAN-IN-THE-LOOP
+      </div>
+
+      <h1>
+        See the finding.<br>
+        <em>Show the evidence.</em>
+      </h1>
+
+      <p>
+        Upload an X-ray or DICOM study. MediScope surfaces only
+        findings that can be localized in the image, assigns
+        model confidence, and clearly separates clinical context
+        from visual evidence.
+      </p>
+
+    </div>
+
+
+    <div class="rule-card">
+
+      <strong>Evidence Gate</strong>
+
+      <span>
+        Unsupported findings are discarded before they reach
+        the dashboard.
+      </span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       WORKSPACE
+  ====================================================== -->
+
+  <section class="workspace">
+
+
+    <!-- ===================================================
+         01 — INPUT
+    ==================================================== -->
+
+    <aside class="panel input-panel">
+
+      <div class="panel-title">
+
+        <span>
+          01 · STUDY INPUT
+        </span>
+
+        <small>
+          PRIVATE SESSION
+        </small>
+
+      </div>
+
+
+      <div id="dropzone" class="dropzone">
+
+        <div class="upload-icon">
+          ＋
+        </div>
+
+        <h3>
+          Drop scan here
+        </h3>
+
+        <p>
+          PNG · JPG · WEBP · DICOM · DICOM ZIP
+        </p>
+
+
+        <button
+          id="browseBtn"
+          class="secondary"
+          type="button"
+        >
+          Browse files
+        </button>
+
+
+        <input
+          id="scan"
+          type="file"
+          accept=".png,.jpg,.jpeg,.webp,.dcm,.dicom,.zip"
+          hidden
+        >
+
+
+        <div
+          id="fileName"
+          class="filename"
+        >
+          No study selected
+        </div>
+
+      </div>
+
+
+
+      <label>
+        MODALITY
+      </label>
+
+
+      <select id="modality">
+
+        <option>
+          Auto-detect
+        </option>
+
+        <option>
+          X-ray
+        </option>
+
+        <option>
+          CT
+        </option>
+
+        <option>
+          MRI
+        </option>
+
+        <option>
+          Ultrasound
+        </option>
+
+        <option>
+          Other
+        </option>
+
+      </select>
+
+
+
+      <label>
+        PATIENT NOTES
+        <span>
+          OPTIONAL
+        </span>
+      </label>
+
+
+      <textarea
+        id="notes"
+        placeholder="Example: 52-year-old. Fever for 5 days. Persistent cough."
+      ></textarea>
+
+
+
+      <button
+        id="analyzeBtn"
+        class="primary"
+        type="button"
+      >
+
+        <span>
+          Analyze with MediScope
+        </span>
+
+        <b>
+          →
+        </b>
+
+      </button>
+
+
+      <div class="privacy">
+        Prototype only · Do not upload identifiable patient data.
+      </div>
+
+    </aside>
+
+
+
+    <!-- ===================================================
+         02 — EVIDENCE VIEWER
+    ==================================================== -->
+
+    <section class="panel viewer-panel">
+
+
+      <div class="viewer-head">
+
+        <div>
+
+          <div class="panel-title">
+            02 · EVIDENCE VIEWER
+          </div>
+
+          <small id="studyMeta">
+            Waiting for study
+          </small>
+
+        </div>
+
+
+        <!--
+          Kept in DOM for compatibility with existing app.js.
+          CSS hides these controls.
+        -->
+
+        <div class="tools">
+
+          <button
+            id="zoomOut"
+            type="button"
+          >
+            −
+          </button>
+
+          <button
+            id="zoomReset"
+            type="button"
+          >
+            100%
+          </button>
+
+          <button
+            id="zoomIn"
+            type="button"
+          >
+            ＋
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           VIEWER
+
+           IMPORTANT:
+           .image-stage contains BOTH:
+
+              1. scanImage
+              2. markers
+
+           Therefore bounding boxes are positioned relative
+           to the actual displayed image.
+      ================================================== -->
+
+      <div
+        class="viewer"
+        id="viewer"
+      >
+
+
+        <!-- Empty state -->
+
+        <div
+          class="empty-view"
+          id="emptyView"
+        >
+
+          <div class="scan-symbol">
+            ⌁
+          </div>
+
+          <span>
+            Study preview appears here
+          </span>
+
+        </div>
+
+
+
+        <!--
+          IMAGE STAGE
+
+          This is the coordinate system for the
+          image and all AI bounding boxes.
+        -->
+
+        <div
+          class="image-stage"
+          id="imageStage"
+          hidden
+        >
+
+
+          <!-- Actual medical image -->
+
+          <img
+            id="scanImage"
+            alt="Medical imaging study"
+            draggable="false"
+          >
+
+
+          <!--
+            AI bounding boxes are inserted here by app.js.
+
+            Example generated structure:
+
+            <div class="marker">
+              <div class="tag">
+                F1 · 95%
+              </div>
+            </div>
+          -->
+
+          <div
+            id="markers"
+            aria-label="AI evidence markers"
+          ></div>
+
+
+        </div>
+
+
+
+        <!-- Viewer badge -->
+
+        <div
+          id="viewerBadge"
+          hidden
+        >
+          AI EVIDENCE OVERLAY
+        </div>
+
+      </div>
+
+
+
+      <div class="viewer-foot">
+
+        <span id="imageCount">
+          0 images
+        </span>
+
+        <span>
+          Bounding boxes are AI-generated and require clinician review.
+        </span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         03 — FINDINGS
+    ==================================================== -->
+
+    <aside class="panel results-panel">
+
+      <div class="panel-title">
+
+        <span>
+          03 · FINDINGS
+        </span>
+
+        <small>
+          ASSISTIVE ONLY
+        </small>
+
+      </div>
+
+
+      <div id="results">
+
+        <div class="results-empty">
+
+          <div class="shield">
+            ◇
+          </div>
+
+          <h3>
+            No analysis yet
+          </h3>
+
+          <p>
+            Upload a study and run the evidence-first review.
+          </p>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <span>
+      MEDISCOPE AI · HACKATHON RESEARCH PROTOTYPE
+    </span>
+
+    <span>
+      Not a medical diagnosis · Human review required
+    </span>
+
+  </footer>
+
+</main>
+
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
